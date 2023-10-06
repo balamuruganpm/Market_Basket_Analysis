@@ -19,9 +19,7 @@ The Apriori algorithm works in two steps that are illustrated below.
 1.It identifies the itemsets systematically that occur frequently in the dataset and support greater than the pre-specified threshold value.
 2.Next, it calculates the confidence of all possible rules. However, it only keeps those items states that have confidence greater than a pre-specified threshold.
 ```
-
 ### It is further classified into three components.
-
 ```
 - Support
 - Lift
