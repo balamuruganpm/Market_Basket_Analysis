@@ -34,27 +34,17 @@ Market basket analysis is based on association rule mining which is ```IF {}, TH
 Import the necessary libraries
 
 ```
-import pandas as pd
 import numpy as np
-from mlxtend.frequent_patterns import apriori
-from mlxtend.frequent_patterns import association_rules
-
-#for viz
+import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-
-%matplotlib inline
-
-#to avoid warning
-import warnings
-warnings.filterwarnings('ignore')
-
-#to display all feature if the number increase
-pd.set_option('display.max_columns', None)
+from apyori import apriori
+from mlxtend.frequent_patterns import apriori
+from mlxtend.frequent_patterns import association_rules
 ```
 
 Data preprocessing
 
 ```
-dataset = pd.read_excel('/kaggle/input/market-basket-analysis/Assignment-1_Data.xlsx')
+mba_data = pd.read_excel("mba.xlsx")
 ```
