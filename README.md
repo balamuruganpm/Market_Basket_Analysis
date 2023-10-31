@@ -13,7 +13,7 @@ Market basket analysis utilizes association rule ***{IF} - > {THEN}*** to predic
 Apriori is the commonly cited algorithm by the data scientist that identifies frequent items in the database. It is useful for unsupervised learning and requires no training and thus no predictions. This algorithm is used especially for large data sets where useful relationships among the items are to be determined.
 You would be surprised to know that Apriori algorithm leverages a shortcut namely Apriori property. This shortcut states that all items in a frequent itemset must also be frequent. It helps in saving a lot of computational time.
 
-<img src="img/Example-of-the-apriori-algorithm.png" width="300" />
+<img src="Example-of-the-apriori-algorithm.png" width="300" />
 
 The Apriori algorithm works in two steps that are illustrated below.
 
