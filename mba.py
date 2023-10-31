@@ -46,3 +46,39 @@ plt.ylabel('Totally Sold by Value')
 plt.title('Items with Highest Sales (by Quantity)')
 plt.xticks(rotation=100)
 plt.show()
+
+# Sales Distribution of Items using Seaborn
+plt.figure(figsize=(12, 6))
+sns.countplot(data=data, x='Itemname', order=data['Itemname'].value_counts().index)
+plt.title('Item Distribution')
+plt.xticks(rotation=90)
+plt.show()
+
+# Calculate item popularity
+item_popularity = data['Itemname'].value_counts().head(10)
+
+# Top 10 Most Popular Items using Seaborn
+plt.figure(figsize=(12, 6))
+sns.barplot(x=item_popularity.index, y=item_popularity.values, palette='viridis')
+plt.title(f'Top 10 Most Popular Items')
+plt.xticks(rotation=90)
+plt.show()
+
+
+# Calculate average quantity and spending per customer
+customer_behavior = data.groupby('CustomerID').agg({'Quantity': 'mean', 'Price': 'sum'}).reset_index()
+
+# Create a scatter plot
+plt.figure(figsize=(12, 6))
+plt.scatter(customer_behavior['Quantity'], customer_behavior['Price'], s=100, c='coral', label='Customers')
+plt.title('Customer Behavior')
+plt.xlabel('Average Quantity')
+plt.ylabel('Total Spending')
+
+# Add a table to the plot
+cell_text = []
+for row in customer_behavior.itertuples(index=False):
+    cell_text.append([row.CustomerID, row.Quantity, row.Price])
+
+plt.table(cellText=cell_text, colLabels=['CustomerID', 'Average Quantity', 'Total Spending'], loc='bottom', cellLoc='center')
+plt.show()
