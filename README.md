@@ -100,3 +100,53 @@ plt.title('Items with Highest Sales (by Quantity)')
 plt.xticks(rotation=100)
 plt.show()
 ```
+
+8. K-Means clustering to find patterns in your dataset
+
+```
+selected_features = data[['Quantity', 'Price']]
+num_clusters = 3
+kmeans = KMeans(n_clusters=num_clusters)
+data['Cluster'] = kmeans.fit_predict(selected_features)
+
+# Visualize the clusters (you may need to adjust this based on the number of features)
+for cluster in range(num_clusters):cluster_data = data[data['Cluster'] == cluster]plt.scatter(cluster_data['Quantity'], cluster_data['Price'], label=f'Cluster {cluster + 1}')
+
+plt.xlabel('Quantity')
+plt.ylabel('Price')
+plt.legend()
+plt.show()
+
+# Analyze the clusters and patterns
+for cluster in range(num_clusters):
+cluster_data = data[data['Cluster'] == cluster]
+print(f'Cluster {cluster + 1}:')
+print(cluster_data.describe())
+
+# Further analysis within each cluster
+centroid = kmeans.cluster_centers_[cluster]
+print(f'Centroid for Cluster {cluster + 1}:')
+print(f'Quantity: {centroid[0]}')
+print(f'Price: {centroid[1]}')
+
+# Plot histograms for each feature within the cluster
+plt.figure(figsize=(10, 6))
+plt.hist(cluster_data['Quantity'], bins=20, alpha=0.5, label='Quantity')
+plt.hist(cluster_data['Price'], bins=20, alpha=0.5, label='Price')
+plt.xlabel('Feature Values')
+plt.ylabel('Frequency')
+plt.title(f'Cluster {cluster + 1} Feature Distributions')
+plt.legend()
+plt.show()
+```
+
+9. Frequent itemset
+
+```
+basket = (data.groupby(['BillNo', 'Itemname'])['Quantity'].sum().unstack().reset_index().fillna(0).set_index('BillNo'));
+basket_sets = basket.applymap(lambda quantity: bool(quantity >= 1));
+frequent_itemsets = apriori(basket_sets, min_support=0.01, use_colnames=True);
+rules = association_rules(frequent_itemsets, metric="lift", min_threshold=1.0);
+print("Association Rules:");
+print(rules);
+```
