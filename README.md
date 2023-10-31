@@ -13,7 +13,7 @@ Market basket analysis utilizes association rule ***{IF} - > {THEN}*** to predic
 Apriori is the commonly cited algorithm by the data scientist that identifies frequent items in the database. It is useful for unsupervised learning and requires no training and thus no predictions. This algorithm is used especially for large data sets where useful relationships among the items are to be determined.
 You would be surprised to know that Apriori algorithm leverages a shortcut namely Apriori property. This shortcut states that all items in a frequent itemset must also be frequent. It helps in saving a lot of computational time.
 
-<img src="Example-of-the-apriori-algorithm.png" width="70" height="70">
+<img src="Example-of-the-apriori-algorithm.png" width="300">
 
 The Apriori algorithm works in two steps that are illustrated below.
 
@@ -61,59 +61,37 @@ print(mba_data.head())
 4. To remove missing & duplicate values:
 
 ```
-# Check for missing values in the "BillNo" column
 missing_values = mba_data['BillNo'].isnull().sum()
-
-# Check for duplicate values in the "BillNo" column
 duplicate_values = mba_data['BillNo'].duplicated().sum()
-
 print(f"Missing values in 'BillNo' column: {missing_values}")
 print(f"Duplicate values in 'BillNo' column: {duplicate_values}")
-
-# Clean the dataset by removing rows with missing or duplicate values in the "BillNo" column
 mba_data_cleaned = mba_data.dropna(subset=['BillNo']).drop_duplicates(subset=['BillNo'])
-
 # Save the cleaned dataset to a new CSV file
 mba_data_cleaned.to_csv("cleaned_mba.csv", index=False)
-
-# Confirm the cleaning and saving
 print("Cleaned dataset saved as 'cleaned_mba.csv'")
 ```
 
 5. Combine All Sets of Data to Determine the Date with the Highest Sales:
 
 ```
-# Group the data by Date and calculate the total sales for each date
 date_sales = mba_data.groupby('Date')['Price'].sum()
-
-# Find the date with the highest total sales
 date_with_highest_sales = date_sales.idxmax()
-
 print(f"The date with the highest sales is {date_with_highest_sales} with a total sales of {date_sales.max()}")
 ```
 
 6. Determine Which Country has the Highest Sales:
 
 ```
-# Group the data by Country and calculate the total sales for each country
 country_sales = mba_data.groupby('Country')['Price'].sum()
-
-# Find the country with the highest total sales
 country_with_highest_sales = country_sales.idxmax()
-
 print(f"The country with the highest sales is {country_with_highest_sales} with a total sales of {country_sales.max()}")
 ```
 
 7. Display Which Item has the Highest Sale using the Quantity Column:
 
 ```
-# Group the data by Itemname and calculate the total quantity sold for each item
 item_sales = mba_data.groupby('Itemname')['Quantity'].sum()
-
-# Sort the items by total quantity in descending order
 sorted_items = item_sales.sort_values(ascending=False)
-
-# Plot a bar chart to visualize the top-selling items
 plt.figure(figsize=(10, 6))
 plt.bar(sorted_items.index, sorted_items)
 plt.xlabel('Item Names')
@@ -122,5 +100,3 @@ plt.title('Items with Highest Sales (by Quantity)')
 plt.xticks(rotation=100)
 plt.show()
 ```
-
-### more data coming soon
